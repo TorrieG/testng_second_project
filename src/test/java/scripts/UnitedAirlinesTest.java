@@ -44,7 +44,7 @@ public class UnitedAirlinesTest extends Base{
 
         Assert.assertTrue(uaSearchPage.roundTripOneWayRadioButtons.get(1).isDisplayed());
         Assert.assertTrue(uaSearchPage.roundTripOneWayRadioButtons.get(1).isEnabled());
-        Assert.assertFalse(uaSearchPage.roundTripOneWayRadioButtons.get(1).isSelected());
+        Assert.assertFalse(uaSearchPage.oneWayRadioButton.isSelected());
 
         uaSearchPage.roundTripOneWayRadioButtons.get(1).click();
 
@@ -53,46 +53,50 @@ public class UnitedAirlinesTest extends Base{
     }
     @Test(priority = 4, description = "Test Case 4 | Book with miles and Flexible dates")
     public void testMilesAndFlexibleDates(){
-//        Assert.assertTrue(uaSearchPage.bookWithMilesCheckbox.isDisplayed());
-//        Assert.assertTrue(uaSearchPage.bookWithMilesCheckbox.isEnabled());
-//        Assert.assertFalse(uaSearchPage.bookWithMilesCheckbox.isSelected());
 
-        Assert.assertTrue(uaSearchPage.flexibleDatesCheckbox.isDisplayed());
-        Assert.assertTrue(uaSearchPage.flexibleDatesCheckbox.isEnabled());
-        Assert.assertFalse(uaSearchPage.flexibleDatesCheckbox.isSelected());
+        Assert.assertTrue(uaSearchPage.bookWithMilesCheckboxLabel.get(0).isDisplayed());
+        Assert.assertTrue(uaSearchPage.checkBoxInputs.get(0).isEnabled());
+        Assert.assertFalse(uaSearchPage.checkBoxInputs.get(0).isSelected());
 
-//        uaSearchPage.bookWithMilesCheckbox.click();
-        uaSearchPage.flexibleDatesCheckbox.click();
+        Assert.assertTrue(uaSearchPage.bookWithMilesCheckboxLabel.get(1).isDisplayed());
+        Assert.assertTrue(uaSearchPage.checkBoxInputs.get(1).isEnabled());
+        Assert.assertFalse(uaSearchPage.checkBoxInputs.get(1).isSelected());
 
-//        Assert.assertTrue(uaSearchPage.bookWithMilesCheckbox.isSelected());
-//        Assert.assertTrue(uaSearchPage.flexibleDatesCheckbox.isSelected());
+        uaSearchPage.bookWithMilesCheckboxLabel.get(0).click();
+        uaSearchPage.bookWithMilesCheckboxLabel.get(1).click();
+        Waiters.pause(1);
+        Assert.assertTrue(uaSearchPage.checkBoxInputs.get(0).isSelected());
+        Assert.assertTrue(uaSearchPage.checkBoxInputs.get(1).isSelected());
 
-//        uaSearchPage.bookWithMilesCheckbox.click();
-        uaSearchPage.flexibleDatesCheckbox.click();
+        uaSearchPage.bookWithMilesCheckboxLabel.get(0).click();
+        uaSearchPage.bookWithMilesCheckboxLabel.get(1).click();
+        Assert.assertFalse(uaSearchPage.checkBoxInputs.get(0).isSelected());
+        Assert.assertFalse(uaSearchPage.checkBoxInputs.get(1).isSelected());
 
-//        Assert.assertFalse(uaSearchPage.bookWithMilesCheckbox.isSelected());
-        Assert.assertFalse(uaSearchPage.flexibleDatesCheckbox.isSelected());
     }
     @Test(priority = 5, description = "Test Case 5 | One-way ticket search results")
     public void testOneWayTicketSearchResults(){
         uaSearchPage.oneWayRadioButton.click();
-        //uaSearchPage.fromInputBox.click();
-        // "Chicago, IL, US (ORD)"
+        uaSearchPage.fromInputBox.clear();
+        uaSearchPage.fromInputBox.sendKeys("Chicago, IL, US (ORD)");
         uaSearchPage.toInputBox.sendKeys("Miami, FL, US (MIA)");
         uaSearchPage.datesInputBox.click();
         uaSearchPage.datesInputBox.clear();
+        Waiters.pause(2);
         uaSearchPage.datesInputBox.sendKeys("Jan 30");
         uaSearchPage.travelersCount.click();
-        Waiters.pause(1);
-        uaSearchPage.getTravelersCount.sendKeys("2");
-        uaSearchPage.cabinDropdown.click();
+        uaSearchPage.addOneMoreAdultButton.click();
+        uaSearchPage.cabinTypeDropdown.click();
+        uaSearchPage.clickOnCabinTypeOption("Business or First");
+        Waiters.pause(2);
+        uaSearchPage.findFlightsButton.click();
+
 
         //uaSearchPage.cabinDropdown.sendKeys("b");
         // Business or First
-        Waiters.pause(2);
-        uaSearchPage.findFlightsButton.click();
-        Waiters.pause(2);
-        Assert.assertEquals(uaSearchPage.departureDetails.getText(), "Phoenix, AZ, US to Miami, FL, US");
+        //uaSearchPage.findFlightsButton.click();
+        //Waiters.pause(2);
+        Assert.assertEquals(resultsPage.departureDetails.getText(), "Chicago, IL, US to Miami, FL, US");
 
 
 

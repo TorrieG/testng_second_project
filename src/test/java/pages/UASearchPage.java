@@ -27,13 +27,13 @@ public class UASearchPage {
     @FindBy(id = "roundtrip")
     public WebElement roundTripButton;
 
-    @FindBy(id = "award")
-    public WebElement bookWithMilesCheckbox;
+    @FindBy(css = "div[class*='checkboxWrapper']>label")
+    public List<WebElement> bookWithMilesCheckboxLabel;
 
-    @FindBy(css = "label[for='award']")
-    public WebElement flexibleDatesCheckbox;
+    @FindBy(css = "div[class*='checkboxWrapper']>input")
+    public List<WebElement> checkBoxInputs;
 
-    @FindBy(id = "#bookFlightOriginInput")
+    @FindBy(css = "#bookFlightOriginInput")
     public WebElement fromInputBox;
 
     @FindBy(id = "bookFlightDestinationInput")
@@ -42,21 +42,32 @@ public class UASearchPage {
     @FindBy(id = "DepartDate")
     public WebElement datesInputBox;
 
-    @FindBy(id = "")
-    public WebElement dayInputBox;
-
     @FindBy(id = "passengerSelector")
     public WebElement travelersCount;
 
-    @FindBy(css = "input[class=app-components-PassengerSelector-passengers__passengerRow__input--13_Gq]")
-    public WebElement getTravelersCount;
+    public void clickOnCabinTypeOption(String optionText){
+        for(WebElement element : cabinTypeOptions){
+            if(element.getText().equals(optionText)){
+                element.click();
+                break;
+            }
+        }
+    }
 
-    @FindBy(css = "#cabinType>div")
-    public WebElement cabinDropdown;
+
+    @FindBy(id = "cabinType")
+    public WebElement cabinTypeDropdown;
 
     @FindBy(css = "button[type='submit']")
     public WebElement findFlightsButton;
 
-    @FindBy(xpath = "(//div[@class='app-components-Shopping-TripInfo-styles__tripOriginDestinationHeader--RcPyp']//span)[3]")
-    public WebElement departureDetails;
+    @FindBy(css = "button[aria-label='Substract one Adult']")
+    public WebElement addOneMoreAdultButton;
+
+    @FindBy(css = "li[id^='cabinType_item-']")
+    public List<WebElement> cabinTypeOptions;
+
+
+
+
 }

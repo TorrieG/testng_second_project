@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
+import pages.ResultsPage;
 import pages.UASearchPage;
 import utilities.Driver;
 
@@ -17,6 +18,7 @@ public class Base {
     Actions actions;
     JavascriptExecutor js;
     UASearchPage uaSearchPage;
+    ResultsPage resultsPage;
 
     @BeforeMethod
     public void setup(){
@@ -27,6 +29,7 @@ public class Base {
         js = (JavascriptExecutor) driver;
         driver.get("https://www.united.com/en/us");
         uaSearchPage = new UASearchPage(driver);
+        resultsPage = new ResultsPage(driver);
 
     }
 
